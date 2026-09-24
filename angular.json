@@ -18,8 +18,9 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-architects/module-federation:build",
+          "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist/coffee-cart-mfe",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -31,8 +32,7 @@
             ],
             "styles": [
               "src/styles.scss"
-            ],
-            "publicPath": "auto"
+            ]
           },
           "configurations": {
             "production": {
@@ -59,7 +59,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-architects/module-federation:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "coffee-cart-mfe:build:production"
