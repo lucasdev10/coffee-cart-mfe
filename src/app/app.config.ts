@@ -6,6 +6,7 @@ import { provideEffects } from '@ngrx/effects';
 import { routes } from './app.routes';
 import { cartReducer } from './store/cart.reducer';
 import { CartEffects } from './store/cart.effects';
+import { CartSyncEffects } from './store/cart-sync.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       cart: cartReducer,
     }),
-    provideEffects([CartEffects]),
+    provideEffects([CartEffects, CartSyncEffects]),
   ]
 };
 
