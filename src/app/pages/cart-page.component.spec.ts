@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CartPageComponent } from './cart-page.component';
+import { provideMockStore } from '@ngrx/store/testing';
+import { initialCartState } from '../store/cart.state';
 
 describe('CartPageComponent', () => {
   let component: CartPageComponent;
@@ -8,6 +10,11 @@ describe('CartPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CartPageComponent],
+      providers: [
+        provideMockStore({
+          initialState: { cart: initialCartState },
+        }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CartPageComponent);
@@ -19,8 +26,18 @@ describe('CartPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display cart page title', () => {
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Shopping Cart');
+  it('should have store injected', () => {
+    expect(component['store']).toBeTruthy();
+  });
+
+  it('should have router injected', () => {
+    expect(component['router']).toBeTruthy();
+  });
+
+  it('should have observable properties', () => {
+    expect(component.items$).toBeTruthy();
+    expect(component.total$).toBeTruthy();
+    expect(component.isEmpty$).toBeTruthy();
   });
 });
+

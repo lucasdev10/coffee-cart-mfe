@@ -1,12 +1,21 @@
 /**
+ * Product interface (minimal version for cart item)
+ */
+export interface Product {
+  id: string;
+  name: string;
+  price: number;
+  imageUrl?: string;
+  stock: number;
+}
+
+/**
  * Cart Item Interface
  */
 export interface CartItem {
-  productId: string;
-  productName: string;
+  product: Product;
   quantity: number;
-  price: number;
-  image?: string;
+  subtotal: number; // price * quantity
 }
 
 /**
@@ -14,8 +23,11 @@ export interface CartItem {
  */
 export interface CartState {
   items: CartItem[];
+  subtotal: number;
+  shipping: number;
+  tax: number;
   total: number;
-  count: number;
+  itemCount: number;
   loading: boolean;
   error: string | null;
 }
@@ -25,8 +37,11 @@ export interface CartState {
  */
 export const initialCartState: CartState = {
   items: [],
+  subtotal: 0,
+  shipping: 0,
+  tax: 0,
   total: 0,
-  count: 0,
+  itemCount: 0,
   loading: false,
   error: null,
 };

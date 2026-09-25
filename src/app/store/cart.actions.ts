@@ -1,21 +1,22 @@
 import { createAction, props } from '@ngrx/store';
-import { CartItem } from './cart.state';
+import { CartItem, CartState } from './cart.state';
+import { Product } from './cart.state';
 
 // Add Item Action
-export const addItemToCart = createAction(
+export const addItem = createAction(
   '[Cart] Add Item',
-  props<{ item: CartItem }>()
+  props<{ product: Product; quantity: number }>()
 );
 
 // Remove Item Action
-export const removeItemFromCart = createAction(
+export const removeItem = createAction(
   '[Cart] Remove Item',
   props<{ productId: string }>()
 );
 
 // Update Quantity Action
-export const updateCartItemQuantity = createAction(
-  '[Cart] Update Item Quantity',
+export const updateQuantity = createAction(
+  '[Cart] Update Quantity',
   props<{ productId: string; quantity: number }>()
 );
 
@@ -26,7 +27,14 @@ export const clearCart = createAction(
 
 // Load Cart from Storage Action
 export const loadCartFromStorage = createAction(
-  '[Cart] Load from Storage'
+  '[Cart] Load from Storage',
+  props<{ cart: CartState }>()
+);
+
+// Update Cart
+export const updateCart = createAction(
+  '[Cart] Update Cart',
+  props<{ cart: Partial<CartState> }>()
 );
 
 // Cart Operation Success Action
@@ -40,3 +48,14 @@ export const cartOperationError = createAction(
   '[Cart] Operation Error',
   props<{ error: string }>()
 );
+
+export const CartActions = {
+  addItem,
+  removeItem,
+  updateQuantity,
+  clearCart,
+  loadCartFromStorage,
+  updateCart,
+  cartOperationSuccess,
+  cartOperationError,
+};
